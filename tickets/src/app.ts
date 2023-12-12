@@ -2,6 +2,8 @@ import express from 'express';
 import 'express-async-errors';
 import {json} from 'body-parser';
 import cookieSession from "cookie-session";
+import { createTicketRouter} from "./routes/new";
+import { currentUser } from "@vshtickets/common";
 
 import { errorHandler, NotFoundError } from "@vshtickets/common";
 
@@ -12,6 +14,9 @@ app.use(cookieSession({
     signed: false,
     secure: process.env.NODE_ENV !== 'test'
 }));
+app.use(currentUser);
+
+app.use(createTicketRouter);
 
 app.all('*', async () => {
     throw new NotFoundError();
