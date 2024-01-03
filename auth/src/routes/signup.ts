@@ -1,7 +1,9 @@
-import express, {Request, Response} from "express";
+import {Express, Request, Response, NextFunction} from 'express';
+
+const express = require('express');
 import {body} from 'express-validator';
 import {User} from "../models/user";
-import { validateRequest, BadRequestError } from "@vshtickets/common";
+import {validateRequest, BadRequestError} from "@vshtickets/common";
 
 const router = express.Router();
 import jwt from 'jsonwebtoken';
@@ -14,7 +16,7 @@ router.post("/api/users/signup",
             max: 20
         }).withMessage('Password must be between 4 and 20 characters')
     ],
-    //validateRequest,
+    validateRequest,
     async (req: Request, res: Response) => {
         const {email, password} = req.body;
 

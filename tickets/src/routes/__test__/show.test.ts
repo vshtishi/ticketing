@@ -9,8 +9,8 @@ it('returns a 404 if the ticket is not found', async () => {
 })
 
 it('returns the ticket if the ticket is found', async () => {
-    const title = 'Test ticket'
-    const price = 20;
+    const title: string = 'Test ticket'
+    const price: number = 20;
 
     const response = await request(app)
         .post('/api/tickets')

@@ -1,4 +1,5 @@
-import express, {Request, Response} from "express";
+import { Request, Response } from 'express';
+const express = require('express');
 import {body} from "express-validator";
 import { validateRequest, BadRequestError } from "@vshtickets/common";
 
@@ -18,7 +19,7 @@ router.post("/api/users/signin",
             .notEmpty()
             .withMessage('You must supply a password')
     ],
-  //  validateRequest,
+    validateRequest,
     async (req: Request, res: Response) => {
         const {email, password} = req.body;
 
