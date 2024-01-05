@@ -4,6 +4,7 @@ import {json} from 'body-parser';
 import cookieSession from "cookie-session";
 import { createTicketRouter} from "./routes/new";
 import { showTicketRouter} from "./routes/show";
+import { indexTicketRouter} from "./routes";
 import { currentUser } from "@vshtickets/common";
 
 import { errorHandler, NotFoundError } from "@vshtickets/common";
@@ -19,6 +20,7 @@ app.use(currentUser);
 
 app.use(createTicketRouter);
 app.use(showTicketRouter);
+app.use(indexTicketRouter);
 
 app.all('*', async () => {
     throw new NotFoundError();
