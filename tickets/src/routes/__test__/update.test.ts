@@ -29,14 +29,15 @@ it('returns a 401 if the user is not authenticated', async () => {
 });
 
 it('returns a 401 if the user does not own the ticket', async () => {
+    const cookie = global.signin();
     const response = await request(app)
+
         .post('/api/tickets')
-        .set('Cookie', global.signin())
+        .set('Cookie', cookie)
         .send({
             title: 'sdds',
             price: 20
         });
-
 
     await request(app)
         .put(`/api/tickets/${response.body.id}`)
