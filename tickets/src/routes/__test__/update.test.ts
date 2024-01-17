@@ -29,11 +29,9 @@ it('returns a 401 if the user is not authenticated', async () => {
 });
 
 it('returns a 401 if the user does not own the ticket', async () => {
-    const cookie = global.signin();
     const response = await request(app)
-
         .post('/api/tickets')
-        .set('Cookie', cookie)
+        .set('Cookie', global.signin())
         .send({
             title: 'sdds',
             price: 20
@@ -52,7 +50,6 @@ it('returns a 401 if the user does not own the ticket', async () => {
 it('returns a 400 if the user provides an invalid title or price', async () => {
     const cookie = global.signin();
     const response = await request(app)
-
         .post('/api/tickets')
         .set('Cookie', cookie)
         .send({
@@ -74,7 +71,6 @@ it('returns a 400 if the user provides an invalid title or price', async () => {
 it('returns a 200 if the user provides valid data', async () => {
     const cookie = global.signin();
     const response = await request(app)
-
         .post('/api/tickets')
         .set('Cookie', cookie)
         .send({

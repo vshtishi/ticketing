@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
 
 const express = require('express');
-import {requireAuth, validateRequest} from '@vshtickets/common';
+import {NotAuthorizedError, requireAuth, validateRequest} from '@vshtickets/common';
 import {body} from "express-validator";
 import {Ticket} from "../models/ticket";
 
@@ -21,7 +21,7 @@ router.put(
         }
 
         if (ticket.userId !== req.currentUser!.id) {
-            return next(new Error('Not authorized'));
+            return next(new NotAuthorizedError());
         }
 
         ticket.set({
